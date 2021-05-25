@@ -15,7 +15,10 @@ jobs:
     - name: login gh container registry
       run:  echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u USERNAME --password-stdin
     - name: Build docker image
-      run: docker buildx build --tag ghcr.io/${GITHUB_REPOSITORY,,}:${GITHUB_REF#refs/heads/} --platform linux/amd64,linux/arm64,linux/arm/v7 .
+      run: |
+        docker buildx create --use --name mybuild node-arm64
+        docker buildx create --append --name mybuild node-amd64
+        docker buildx build --tag ghcr.io/${GITHUB_REPOSITORY,,}:${GITHUB_REF#refs/heads/} --platform linux/amd64,linux/arm64 .
     - name: Push Docker image
       run: docker push ghcr.io/${GITHUB_REPOSITORY,,}:${GITHUB_REF#refs/heads/}
 
