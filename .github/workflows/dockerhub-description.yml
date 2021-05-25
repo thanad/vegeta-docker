@@ -17,7 +17,9 @@ jobs:
     - name: pull docker image
       run: docker pull ghcr.io/${GITHUB_REPOSITORY,,}:${GITHUB_REF#refs/heads/} || true
     - name: Build docker image
-      run: docker build --tag ghcr.io/${GITHUB_REPOSITORY,,}:${GITHUB_REF#refs/heads/} --platform linux/amd64,linux/arm/v7,linux/arm64 .
+      run: |
+        docker build --tag ghcr.io/${GITHUB_REPOSITORY,,}:${GITHUB_REF#refs/heads/} --platform linux/amd64 .
+        docker build --tag ghcr.io/${GITHUB_REPOSITORY,,}:${GITHUB_REF#refs/heads/} --platform linux/arm64 .
     - name: Push Docker image
       run: docker push ghcr.io/${GITHUB_REPOSITORY,,}:${GITHUB_REF#refs/heads/}
 
