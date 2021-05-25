@@ -19,11 +19,11 @@ For earlier versions see [releases](https://github.com/peter-evans/vegeta-docker
 
 To display help:
 ```bash
-docker run --rm -i peterevans/vegeta
+docker run --rm -i thanad/vegeta-docker
 ```
 Example:
 ```bash
-docker run --rm -i peterevans/vegeta sh -c \
+docker run --rm -i thanad/vegeta-docker sh -c \
 "echo 'GET https://www.example.com' | vegeta attack -rate=10 -duration=30s | tee results.bin | vegeta report"
 ```
 For full documentation see [Vegeta](https://github.com/tsenart/vegeta).
@@ -32,11 +32,11 @@ For full documentation see [Vegeta](https://github.com/tsenart/vegeta).
 
 To display help:
 ```bash
-kubectl run vegeta --rm --attach --restart=Never --image="peterevans/vegeta"
+kubectl run vegeta --rm --attach --restart=Never --image="thanad/vegeta-docker"
 ```
 Example:
 ```bash
-kubectl run vegeta --rm --attach --restart=Never --image="peterevans/vegeta" -- sh -c \
+kubectl run vegeta --rm --attach --restart=Never --image="thanad/vegeta-docker" -- sh -c \
 "echo 'GET https://www.example.com' | vegeta attack -rate=10 -duration=30s | tee results.bin | vegeta report"
 ```
 
